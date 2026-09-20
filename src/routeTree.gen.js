@@ -12,14 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as BillingsRouteImport } from './routes/billings'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
 import { Route as PokemonNameRouteImport } from './routes/pokemon.$name'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
 import { Route as ProductsProductIdRouteImport } from './routes/products/$productId'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
 import { Route as AuthenticatedDashboardBillingsRouteImport } from './routes/_authenticated/dashboard/billings'
-import { Route as AuthenticatedDashboardOverviewRouteImport } from './routes/_authenticated/dashboard/overview'
 import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard/settings'
 
 const IndexRoute = IndexRouteImport.update({
@@ -36,16 +35,17 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 })
-const BillingsRoute = BillingsRouteImport.update({
-  id: '/billings',
-  path: '/billings',
-  getParentRoute: () => rootRouteImport,
-})
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRouteImport,
 })
+const AuthenticatedDashboardRouteRoute =
+  AuthenticatedDashboardRouteRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedRoute,
+  })
 const PokemonNameRoute = PokemonNameRouteImport.update({
   id: '/pokemon/$name',
   path: '/pokemon/$name',
@@ -63,34 +63,37 @@ const ProductsProductIdRoute = ProductsProductIdRouteImport.update({
 })
 const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
-    id: '/dashboard/',
-    path: '/dashboard/',
-    getParentRoute: () => AuthenticatedRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
   })
 const AuthenticatedDashboardBillingsRoute =
   AuthenticatedDashboardBillingsRouteImport.update({
-    id: '/dashboard/billings',
-    path: '/dashboard/billings',
-    getParentRoute: () => AuthenticatedRoute,
-  })
-const AuthenticatedDashboardOverviewRoute =
-  AuthenticatedDashboardOverviewRouteImport.update({
-    id: '/dashboard/overview',
-    path: '/dashboard/overview',
-    getParentRoute: () => AuthenticatedRoute,
+    id: '/billings',
+    path: '/billings',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
   })
 const AuthenticatedDashboardSettingsRoute =
   AuthenticatedDashboardSettingsRouteImport.update({
-    id: '/dashboard/settings',
-    path: '/dashboard/settings',
-    getParentRoute: () => AuthenticatedRoute,
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
   })
 
-const AuthenticatedRouteChildren = {
+const AuthenticatedDashboardRouteRouteChildren = {
   AuthenticatedDashboardBillingsRoute: AuthenticatedDashboardBillingsRoute,
-  AuthenticatedDashboardOverviewRoute: AuthenticatedDashboardOverviewRoute,
   AuthenticatedDashboardSettingsRoute: AuthenticatedDashboardSettingsRoute,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+}
+
+const AuthenticatedDashboardRouteRouteWithChildren =
+  AuthenticatedDashboardRouteRoute._addFileChildren(
+    AuthenticatedDashboardRouteRouteChildren,
+  )
+
+const AuthenticatedRouteChildren = {
+  AuthenticatedDashboardRouteRoute:
+    AuthenticatedDashboardRouteRouteWithChildren,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -101,7 +104,6 @@ const rootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
-  BillingsRoute: BillingsRoute,
   LoginRoute: LoginRoute,
   PokemonNameRoute: PokemonNameRoute,
   ProductsProductIdRoute: ProductsProductIdRoute,
