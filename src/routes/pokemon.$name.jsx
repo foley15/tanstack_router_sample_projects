@@ -4,6 +4,7 @@ export const Route = createFileRoute('/pokemon/$name')({
   //loader function
   loader: async({params}) => {
     const {name} = params
+    console.log(params)
 
     if(!name) {
         throw new Error('Could not fetch pokemon')
@@ -16,7 +17,7 @@ export const Route = createFileRoute('/pokemon/$name')({
     }
 
     const data = await res.json()
-    console.log(data)
+  
     return {
         name: data.name,
         sprite: data.sprites.front_default,

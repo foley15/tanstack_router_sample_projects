@@ -10,6 +10,7 @@ component: () => {
                 <Link style={{textDecoration: 'none'}} to="/">Home</Link>
                 <Link style={{textDecoration: 'none'}} to="/about">About</Link>
                 <Link style={{textDecoration: 'none'}} to="/products">Products</Link>
+                <Link style={{textDecoration: 'none'}} to="/dashboard">Dashboard</Link>
             </nav>
         </header>
         <hr />
