@@ -11,6 +11,7 @@ component: () => {
                 <Link style={{textDecoration: 'none'}} to="/about">About</Link>
                 <Link style={{textDecoration: 'none'}} to="/products">Products</Link>
                 <Link style={{textDecoration: 'none'}} to="/dashboard">Dashboard</Link>
+                <Link style={{textDecoration: 'none'}} to="/product">Product</Link>
             </nav>
         </header>
         <hr />

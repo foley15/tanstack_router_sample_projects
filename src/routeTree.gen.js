@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ProductRouteImport } from './routes/product'
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
 import { Route as PokemonNameRouteImport } from './routes/pokemon.$name'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
@@ -38,6 +39,11 @@ const AboutRoute = AboutRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+})
+const ProductRoute = ProductRouteImport.update({
+  id: '/product',
+  path: '/product',
   getParentRoute: () => rootRouteImport,
 })
 const AuthenticatedDashboardRouteRoute =
@@ -105,6 +111,7 @@ const rootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
   LoginRoute: LoginRoute,
+  ProductRoute: ProductRoute,
   PokemonNameRoute: PokemonNameRoute,
   ProductsProductIdRoute: ProductsProductIdRoute,
   ProductsIndexRoute: ProductsIndexRoute,
